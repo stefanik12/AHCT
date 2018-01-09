@@ -1,10 +1,11 @@
 import copy
+import numpy as np
 
 
 mapping = {"Playing a game of skill such as bridge or chess, working on a hobby?":
-               {"Normal": 0, "Requires assistance": 1, "No data": 88},
+               {"Normal": 0, "Requires assistance": 1, "No data": np.nan},
            "Assembling tax records, business affairs, or other papers?":
-               {"Has difficulty, but does by self": 0, "Normal": 1, "Not applicable (e.g., never did)": 88}}
+               {"Has difficulty, but does by self": 0, "Normal": 1, "Not applicable (e.g., never did)": np.nan}}
 
 
 def transform_answers(df):
