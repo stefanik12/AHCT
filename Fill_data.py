@@ -16,7 +16,7 @@ workbook = gc.open(SPREADSHEET)
 sheet = workbook.sheet1
 
 all_cells = sheet.range('A1:C6')
-print (all_cells)
+print(all_cells)
 
 sheet.update_acell('B4', '50%')
 sheet.update_acell('D4', '10%')

@@ -4,6 +4,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
 import json
 
+from answers_transform import transform_answers
 
 SCOPES = ["https://spreadsheets.google.com/feeds"]
 SECRETS_FILE = "Alzheimer-ad3ecd64cce8.json"
@@ -20,4 +21,10 @@ workbook = gc.open(SPREADSHEET)
 sheet = workbook.sheet1
 
 data = pd.DataFrame(sheet.get_all_records())
-print(data)
+
+data_transformed = transform_answers(data)
+
+# Verify that the first column was transformed
+print(data_transformed.iloc[:, 1])
+
+
