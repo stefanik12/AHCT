@@ -29,7 +29,9 @@ mapping = {
 	"Has the subject had any problems keeping track of current events?":
 		{"Normal": 0, "Has difficulty, but does by self": 1, "Requires assistance": 2, "Dependent": 3, "Not applicable (e.g., never did)": np.nan, "Unknown": np.nan},
 	"Has the subject had any difficulty paying attention to e.g. TV program, book or magazine?":
-		{"Normal": 0, "Has difficulty, but does by self": 1, "Requires assistance": 2, "Dependent": 3, "Not applicable (e.g., never did)": np.nan, "Unknown": np.nan}
+		{"Normal": 0, "Has difficulty, but does by self": 1, "Requires assistance": 2, "Dependent": 3, "Not applicable (e.g., never did)": np.nan, "Unknown": np.nan},
+	"Indicate the domain that was first recognized as a change in the subject":
+		{"Cognition": 1, "Behaviour": 2, "Motor function": 3, "Not applicable": np.nan, "Unknown": np.nan}
 }
 
 def transform_answers(df):
