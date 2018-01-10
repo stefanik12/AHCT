@@ -45,13 +45,22 @@ mapping = {
 }
 
 
+def change_keys(df):
+    keys = df.columns
+    aliases = map(lambda key: mapping[key]["alias"], keys)
+    df.columns = aliases
+
+
 def transform_answers(df):
     out_df = copy.deepcopy(df)
     for attribute in mapping.keys():
         for attr_answer, attr_value in mapping[attribute].items():
             out_df[attribute].loc[df[attribute] == attr_answer] = attr_value
 
-            return out_df
+    # remove the timestamp attribute, to make a dataframe classifiable
+    out_df.drop('Horodateur')
 
-    # TODO remove the timestamp attribute, to make a dataframe classifiable
+    change_keys(out_df)
+
+    return out_df
 
