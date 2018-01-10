@@ -70,15 +70,14 @@ def transform_answers(df):
 
 def approximate_missing(df_answers):
     df_base = pd.read_csv("data/data.csv")[df_answers.columns]
-    df_all = df_base.append(df_answers)
 
     # replace values of (Not assessed, Missing/unknown, not collected) with interpolated values
-    attributes_uniques = df_all.applymap(str).describe().transpose()["unique"]
+    attributes_uniques = df_base.applymap(str).describe().transpose()["unique"]
     replaced_attributes = attributes_uniques[attributes_uniques < 8].index.values.tolist()
-    df_all[replaced_attributes] = df_all[replaced_attributes].replace([-4, 8, 9], np.nan)
+    df_base[replaced_attributes] = df_base[replaced_attributes].replace([-4, 8, 9], np.nan)
 
     # approximation over the rows
-    df_all = df_all.interpolate(axis=1)
-    df_answers_out = df_all.loc[df_answers.index]
+    df_all = df_base.append(df_answers.apply(pd.to_numeric)).interpolate(axis=1)
+    df_answers_out = df_all[-len(df_answers):]
     return df_answers_out
 
