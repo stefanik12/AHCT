@@ -18,29 +18,28 @@ Writes the class probabilities to a remote spreadsheet
 
 
 def write_results(results, timestamps):
-		gc = gspread.authorize(credentials)
+    gc = gspread.authorize(credentials)
 
-		workbook = gc.open(SPREADSHEET)
-		sheet = workbook.sheet1
+    workbook = gc.open(SPREADSHEET)
+    sheet = workbook.sheet1
 
+    # sheet.update_acell('A4', timestamps[0])
+    # sheet.update_acell('B4', results[0][0])
+    # sheet.update_acell('C4', results[0][1])
+    # sheet.update_acell('D4', results[0][2])
+    # sheet.update_acell('E4', results[0][3])
 
-		# sheet.update_acell('A4', timestamps[0])
-		# sheet.update_acell('B4', results[0][0])
-		# sheet.update_acell('C4', results[0][1])
-		# sheet.update_acell('D4', results[0][2])
-		# sheet.update_acell('E4', results[0][3])
+    for x in range(len(results)):
+        row = 3 + len(results) - x
+        print(row)
+        sheet.update_acell('A' + str(row), timestamps[x])
+        sheet.update_acell('B' + str(row), str(results[x][0]).replace('.', ','))
+        sheet.update_acell('C' + str(row), str(results[x][1]).replace('.', ','))
+        sheet.update_acell('D' + str(row), str(results[x][2]).replace('.', ','))
+        sheet.update_acell('E' + str(row), str(results[x][3]).replace('.', ','))
 
-		for x in range(len(results)):
-				row = 3 + len(results) - x
-				print(row)
-				sheet.update_acell('A' + str(row), timestamps[x])
-				sheet.update_acell('B' + str(row), str(results[x][0]).replace('.', ','))
-				sheet.update_acell('C' + str(row), str(results[x][1]).replace('.', ','))
-				sheet.update_acell('D' + str(row), str(results[x][2]).replace('.', ','))
-				sheet.update_acell('E' + str(row), str(results[x][3]).replace('.', ','))
-				
-		row = 4 + len(results)
-		sheet.update_acell('B3', "=AVERAGE(B4:B" + str(row) + ")" )
-		sheet.update_acell('C3', "=AVERAGE(C4:C" + str(row) + ")" )
-		sheet.update_acell('D3', "=AVERAGE(D4:D" + str(row) + ")" )
-		sheet.update_acell('E3', "=AVERAGE(E4:E" + str(row) + ")" )
+    row = 4 + len(results)
+    sheet.update_acell('B3', "=AVERAGE(B4:B" + str(row) + ")")
+    sheet.update_acell('C3', "=AVERAGE(C4:C" + str(row) + ")")
+    sheet.update_acell('D3', "=AVERAGE(D4:D" + str(row) + ")")
+    sheet.update_acell('E3', "=AVERAGE(E4:E" + str(row) + ")")
