@@ -7,18 +7,18 @@ mapping = {
          "Requires som assistance with basic activities": 3, "Completely dependent": 4, "Unknown": np.nan, "alias": "INDEPEND"},
     "Taking care of themselves?":
         {"No impairment": 0, "Questionable impairment": 0.5, "Mild impairment": 1, "Moderate impairment": 2,
-         "Severe impairment": 3, "alias" : "PERSCARE"},
+         "Severe impairment": 3, "alias": "PERSCARE"},
     "Shopping for groceries or other household necessities?":
-        {"Normal": 0, "Has difficutly, but does by self": 1, "Requires assistance": 2, "Dependent": 3,
+        {"Normal": 0, "Has difficulty, but does by self": 1, "Requires assistance": 2, "Dependent": 3,
          "Not applicable (e.g., never did)": np.nan, "Unknown": np.nan, "alias": "SHOPPING"},
     "Traveling out of the neighborhood, driving or using public transportation?":
-        {"Normal": 0, "Has difficutly, but does by self": 1, "Requires assistance": 2, "Dependent": 3,
+        {"Normal": 0, "Has difficulty, but does by self": 1, "Requires assistance": 2, "Dependent": 3,
          "Not applicable (e.g., never did)": np.nan, "Unknown": np.nan, "alias":"TRAVEL"},
     "Playing a game of skill such as bridge or chess, working on a hobby?":
-        {"Normal": 0, "Has difficutly, but does by self": 1, "Requires assistance": 2, "Dependent": 3,
+        {"Normal": 0, "Has difficulty, but does by self": 1, "Requires assistance": 2, "Dependent": 3,
          "Not applicable (e.g., never did)": np.nan, "Unknown": np.nan, "alias": "GAMES"},
     "Assembling tax records, business affairs, or other papers?":
-        {"Normal": 0, "Has difficutly, but does by self": 1, "Requires assistance": 2, "Dependent": 3,
+        {"Normal": 0, "Has difficulty, but does by self": 1, "Requires assistance": 2, "Dependent": 3,
          "Not applicable (e.g., never did)": np.nan, "Unknown": np.nan, "alias": "TAXES"},
     "Does the subject suffer from any impairment on their orientation?":
         {"No impairment": 0, "Questionable impairment": 0.5, "Mild impairment": 1, "Moderate impairment": 2,
@@ -58,7 +58,7 @@ def transform_answers(df):
             out_df[attribute].loc[df[attribute] == attr_answer] = attr_value
 
     # remove the timestamp attribute, to make a dataframe classifiable
-    out_df.drop('Horodateur')
+    out_df.drop('Horodateur', axis=1, inplace=True)
 
     change_keys(out_df)
 

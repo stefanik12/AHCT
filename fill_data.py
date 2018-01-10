@@ -12,11 +12,12 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name(SECRETS_FILE, SCO
 
 """
 Writes the class probabilities to a remote spreadsheet
-@param results: probabilities between <0, 1>, sorted from class 0 to 3
+@param results: list of list of probabilities between <0, 1>, sorted from class 0 to 3
+@param timestamps: list of timestamps for the probablility reports
 """
 
 
-def write_results(results):
+def write_results(results, timestamps):
     gc = gspread.authorize(credentials)
 
     workbook = gc.open(SPREADSHEET)
