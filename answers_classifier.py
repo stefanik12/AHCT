@@ -11,7 +11,7 @@ timestamp_param = "Horodateur"
 sheet_filled = download_answer_sheet()
 sheet_classifiable = transform_answers(sheet_filled)
 
-classifier_model = joblib.load("logistic_regression_trained.mod")
+classifier_model = joblib.load("logistic_regression_classifier.mod")
 probs = classifier_model.predict_proba(X=sheet_classifiable)
 
 print(probs)
