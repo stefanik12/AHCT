@@ -14,7 +14,7 @@ sheet_classifiable = transform_answers(sheet_filled)
 classifier_model = joblib.load("logistic_regression_trained.mod")
 probs = classifier_model.predict_proba(X=sheet_classifiable)
 
-print probs
+print(probs)
 
 write_results(probs, sheet_filled[timestamp_param].values)
 
