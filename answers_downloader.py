@@ -11,20 +11,17 @@ SECRETS_FILE = "Alzheimer-ad3ecd64cce8.json"
 SPREADSHEET = "Questionnaire_answers"
 
 credentials = ServiceAccountCredentials.from_json_keyfile_name(SECRETS_FILE, SCOPES)
-gc = gspread.authorize(credentials)
-print("The following sheets are available")
-for sheet in gc.openall():
-    print("{} - {}".format(sheet.title, sheet.id))
 
-workbook = gc.open(SPREADSHEET)
-# Get the first sheet
-sheet = workbook.sheet1
 
-data = pd.DataFrame(sheet.get_all_records())
+def download_answer_sheet():
+    gc = gspread.authorize(credentials)
+    print("The following sheets are available")
+    for sheet in gc.openall():
+        print("{} - {}".format(sheet.title, sheet.id))
 
-data_transformed = transform_answers(data)
+    workbook = gc.open(SPREADSHEET)
+    # Get the first sheet
+    sheet = workbook.sheet1
 
-# Verify that the first column was transformed
-print(data_transformed.iloc[:, 1])
-
+    return pd.DataFrame(sheet.get_all_records())
 
